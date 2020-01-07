@@ -1,0 +1,28 @@
+﻿@page "/fetchdata"
+
+@using Component1.Data
+@inject WeatherForecastService ForecastService
+
+@using Component1.MyComps
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ForecastList FCs=@forecasts/>
+}
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}

@@ -1,0 +1,18 @@
+﻿@page "/counter"
+@using Component1.MyComps
+
+<h1>Counter</h1>
+<Headcomp Title = "Music" />
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
