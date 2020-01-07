@@ -1,7 +1,7 @@
 # blazor-hacknight
 training material, examples for a blazor introduction 
 
-## make your enviroment ready
+## set up your machine
 https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor
 
 Follow this instruction to set up your development enviroment or
