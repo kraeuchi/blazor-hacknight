@@ -19,3 +19,6 @@ https://github.com/bradwellsb/blazor-fire-calculators
 
 Working SignalR example
 https://github.com/conficient/BlazorChatSample
+
+more stuff:
+https://github.com/AdrienTorris/awesome-blazor
