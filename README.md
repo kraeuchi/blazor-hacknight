@@ -17,5 +17,5 @@ Example of Select List / ToDo List https://blazorfiddle.com/s/hbrbzo9e
 Working PWA example
 https://github.com/bradwellsb/blazor-fire-calculators
 
-Working SignalR exmple
+Working SignalR example
 https://github.com/conficient/BlazorChatSample
