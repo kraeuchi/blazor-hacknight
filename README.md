@@ -10,9 +10,9 @@ download the virtual maschine with everything already installed (link will follo
 For a first exploration you can also use https://blazorfiddle.com without
 any installation. There are some basic examples to play with.
 
-https://blazorfiddle.com/s/fkr4fkvl  Example of Select List
+Example of Select List https://blazorfiddle.com/s/fkr4fkvl
 
-https://blazorfiddle.com/s/hbrbzo9e  Example of Select List / ToDo List
+Example of Select List / ToDo List https://blazorfiddle.com/s/hbrbzo9e  
 
 Working PWA example
 https://github.com/bradwellsb/blazor-fire-calculators
