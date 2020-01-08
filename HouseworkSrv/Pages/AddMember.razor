@@ -1,0 +1,84 @@
+﻿@page "/addmember"
+@using HouseworkManager.Data
+@inject AppData       AppDt
+@inject MemberService MemSrv
+
+<h2>Add Household Member </h2>
+
+<div class="calc-container">
+
+    <div class="form-group row">
+        <label for="currentage" class="col-sm-8 col-form-label">Nick name:</label>
+        <div class="col-sm-4">
+            <!--Update when bind:format supports currency formats -->
+            <input id="currentage" class="form-control input-lg" inputmode="text" @bind="AppDt.CurrentNickname" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="currentbalance" class="col-sm-8 col-form-label">Points per week:</label>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <input id="currentbalance" class="form-control input-lg" inputmode="decimal" @bind="AppDt.CurrentPointsperweek" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-12 text-right">
+            <button @onclick="SaveMember" class="btn btn-primary">Save</button>
+        
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nickname</th>
+                <th>Points</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mem in mems)
+            {
+                <tr>
+                    <td>@mem.Nickname</td>
+                    <td>@mem.PointsPerWeek</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+@code {
+
+    private Member[] mems;
+    protected override async Task OnInitializedAsync()
+    {
+        AppDt.CurrentPointsperweek = 50;
+        mems = MemSrv.AddDefaultsAsync().ToArray();
+        String s = mems.ToString();
+    }
+
+
+
+
+    private void SaveMember()
+    {
+
+        if (!string.IsNullOrWhiteSpace(AppDt.CurrentNickname))
+        {
+            mems = MemSrv.Add(AppDt.CurrentNickname, AppDt.CurrentPointsperweek).ToArray();
+        }
+
+        AppDt.CurrentNickname = "";
+        AppDt.CurrentPointsperweek = 50;
+
+    }
+
+}

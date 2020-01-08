@@ -1,0 +1,105 @@
+﻿@page "/todo"
+<h1>Todo (@hnd.Todos.Where(todo => !todo.IsDone).Count())</h1>
+
+<ul>
+    @foreach (var todo in hnd.Todos)
+    {
+        <li>
+            <input type="checkbox" @bind="todo.IsDone" />
+            <input @bind="@todo.Title" />
+            @todo.Info
+        </li>
+    }
+</ul>
+
+<input placeholder="Something todo" @bind="newTodo" />
+<button @onclick="AddTodo">Add todo</button>
+
+@if (!string.IsNullOrEmpty(@hnd.GuidToDeleteStr))
+{
+    <p> TODO to DELETE = @hnd.GuidToDeleteStr </p>
+}
+
+@if (!string.IsNullOrEmpty(@hnd.GuidToUpdateStr))
+{
+    <p> TODO to UPDATE = @hnd.GuidToUpdateStr </p>
+}
+
+
+@code {
+    string newTodo;  // title of todo
+    public TodosHandler hnd = new TodosHandler(); // handler to add, delete, update todo entries
+
+    void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            hnd.AddTodo(newTodo);
+            newTodo = string.Empty;
+        }
+    }
+
+    public class TodoItem
+    {
+        private string _title;
+        public string Title {
+            get { return _title; }
+            set {
+                _title = value;
+                if (Handler != null) Handler.UpdateToDo(this.Guid);
+            }
+        }
+
+        private bool _isDone;
+        public bool IsDone
+        {
+            get { return _isDone; }
+            set
+            {
+                _isDone = value;
+                if (Handler != null) Handler.DeleteToDo(this.Guid);
+            }
+        }
+
+        public TodosHandler Handler { get; set; }
+
+        private string _info = String.Empty;
+        public string Info { get { return " Guid =" + Guid.ToString(); } }
+
+        private Guid _guid = Guid.NewGuid();
+     
+        public Guid Guid { get { return _guid; }}
+
+    }
+
+
+    public class TodosHandler
+    {
+        private IList<TodoItem> _todos = new List<TodoItem>();
+        public IList<TodoItem> Todos { get { return _todos; } }
+
+
+        public void AddTodo(string aTitle)
+        {
+            _todos.Add(new TodoItem { Title = aTitle, Handler = this });
+            // update persistence here ..
+        }
+
+
+        public String GuidToDeleteStr { get; set; }
+        public void DeleteToDo(Guid GuidToDelete)
+        {
+            // update persistence here ...
+            GuidToDeleteStr = GuidToDelete.ToString();
+        }
+
+        public String GuidToUpdateStr { get; set; }
+        public void UpdateToDo(Guid GuidToUpdate)
+        {
+            // update persistence here ...
+            GuidToUpdateStr = GuidToUpdate.ToString();
+        }
+
+    }
+
+}
