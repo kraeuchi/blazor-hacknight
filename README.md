@@ -20,5 +20,8 @@ https://github.com/bradwellsb/blazor-fire-calculators
 Working SignalR example
 https://github.com/conficient/BlazorChatSample
 
+Working IndexedDB example
+https://github.com/wtulloch/Blazor.IndexedDB
+
 more stuff:
 https://github.com/AdrienTorris/awesome-blazor
